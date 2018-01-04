@@ -2,4 +2,4 @@
 
 chmod +x launch-docker.sh
 
-docker pull eturkes/pymice-notebook:py3.5.4
+docker pull eturkes/pymice-notebook:py3.5.4v1
