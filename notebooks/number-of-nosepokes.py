@@ -39,7 +39,7 @@ for i in range(1, 3):
                     if mouse not in pokesByMouse:
                         pokesByMouse[mouse] = 0
                     
-                    for j in range(0, visitorNames.count(mouse)):
+                    for j in range(0, len(visitorNames)):
                         if visitorNames[j] == mouse:
                             for k in range(0, len(visits[j].Nosepokes)):
                                 pokesByMouse[mouse] = pokesByMouse[mouse] + 1

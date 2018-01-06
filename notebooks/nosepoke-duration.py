@@ -40,12 +40,15 @@ for i in range(1, 3):
                         durationByMouse[mouse] = 0
                     
                     for j in range(0, len(visitorNames)):
-                        if visitorNames[j] == mouse:
-                            durationByMouse[mouse] = durationByMouse[mouse] \
-                                + visits[j].Duration.total_seconds()
-                            durationByGroup[mouse[-2:]] = \
-                                durationByGroup[mouse[-2:]] + \
-                                visits[j].Duration.total_seconds()
+                        for k in range(0, len(visits[j].Nosepokes)):
+                            if visitorNames[j] == mouse:
+                                durationByMouse[mouse] = \
+                                    durationByMouse[mouse] + \
+                                visits[j].Nosepokes[k].Duration.total_seconds()
+                                
+                                durationByGroup[mouse[-2:]] = \
+                                    durationByGroup[mouse[-2:]] + \
+                                visits[j].Nosepokes[k].Duration.total_seconds()
                             
     if i == 1:
         durationByMouse1 = durationByMouse
