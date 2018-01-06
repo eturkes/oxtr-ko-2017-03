@@ -15,11 +15,11 @@ do
 	start_secs=$(date +%s --date="${start_date}")
 	end_date="$(date '+%Y-%m-%d %H:%M:%S' --date="@$((start_secs + 60))")"
 
-	echo "" >> comp+old-behav-flex_timeline.ini
-	echo "[Corner Occupation ${i}]" >> comp+old-behav-flex_timeline.ini
-	echo "start = ${start_date}" >> comp+old-behav-flex_timeline.ini
-	echo "end = ${end_date}" >> comp+old-behav-flex_timeline.ini
-	echo "tzinfo = Etc/GMT-9" >> comp+old-behav-flex_timeline.ini
+	echo "" >> hab1.ini
+	echo "[Corner Occupation ${i}]" >> hab1.ini
+	echo "start = ${start_date}" >> hab1.ini
+	echo "end = ${end_date}" >> hab1.ini
+	echo "tzinfo = Etc/GMT-9" >> hab1.ini
 	true $((i=i+1))
 
 	start_date=${end_date}
