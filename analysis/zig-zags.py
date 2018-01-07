@@ -190,7 +190,7 @@ w = 0
 h = 0
 k = 0
 for i in range(0, 2):
-    for mouse in set (byMouse[i]):
+    for mouse in set(byMouse[i]):
         if mouse[-2:] == 'WT':
             if i == 0:
                 WT1mice[w] = byMouse[i][mouse]
@@ -247,6 +247,15 @@ for i in range(0, len(ratio)):
     for j in range(0, len(ratioWT1mice)):
         total = total + ratio[i][j]
     gr[i] = total / 10
+
+stdevMice = [ratioWT1mice, ratioHT1mice, ratioKO1mice, \
+             ratioWT2mice, ratioHT2mice, ratioKO2mice]
+for i in range(0, len(stdevMice)):
+    stdevMice[i] = statistics.stdev(stdevMice[i])
+    
+stdevWT = [stdevMice[0], stdevMice[3]]
+stdevHT = [stdevMice[1], stdevMice[4]]
+stdevKO = [stdevMice[2], stdevMice[5]]
          
 width = 0.8
 
@@ -257,11 +266,11 @@ KO = [gr[2], gr[5]]
 indices = np.arange(len(WT))
 
 plt.bar(indices, WT, width = 0.5 * width, \
-        color = 'tab:blue',  alpha = 0.9, label = 'WT')#, yerr = stdevWT)
+        color = 'tab:blue',  alpha = 0.9, label = 'WT', yerr = stdevWT)
 plt.bar([i + 0.25 * width for i in indices], HT, width = 0.5 * width, \
-        color = 'tab:orange', alpha = 0.9, label = 'HT')#, yerr = stdevHT)
+        color = 'tab:orange', alpha = 0.9, label = 'HT', yerr = stdevHT)
 plt.bar([i-0.25 * width for i in indices], KO, width = 0.5 * width, \
-        color = 'tab:green', alpha = 0.9, label = 'KO')#, yerr = stdevKO)
+        color = 'tab:green', alpha = 0.9, label = 'KO', yerr = stdevKO)
 
 plt.xticks(indices, 
            ['Day{}'.format(i) for i in range(1, 3)] )

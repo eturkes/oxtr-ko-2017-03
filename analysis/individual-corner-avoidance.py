@@ -102,6 +102,54 @@ for i in range(0, len(cornersByGroup)):
     for j in range(0, len(cornersByGroup[i])):
         cornersByGroup[i][j] = cornersByGroup[i][j] / 10
         
+byMouse = [cornersByMouse1, cornersByMouse2]
+
+WT1mice = [0 for x in range(10)]
+HT1mice = [0 for x in range(10)]
+KO1mice = [0 for x in range(10)]
+
+WT2mice = [0 for x in range(10)]
+HT2mice = [0 for x in range(10)]
+KO2mice = [0 for x in range(10)]
+
+w = 0
+h = 0
+k = 0
+for i in range(0, 2):
+    for mouse in set(byMouse[i]):
+        if mouse[-2:] == 'WT':
+            if i == 0:
+                WT1mice[w] = byMouse[i][mouse][7]
+                w = w + 1
+            else:
+                WT2mice[w] = byMouse[i][mouse][7]
+                w = w + 1
+        elif mouse[-2:] == 'HT':
+            if i == 0:
+                HT1mice[h] = byMouse[i][mouse][7]
+                h = h + 1
+            else:
+                HT2mice[h] = byMouse[i][mouse][7]
+                h = h + 1
+        elif mouse[-2:] == 'KO':
+            if i == 0:
+                KO1mice[k] = byMouse[i][mouse][7]
+                k = k + 1
+            else:
+                KO2mice[k] = byMouse[i][mouse][7]
+                k = k + 1
+    w = 0
+    h = 0
+    k = 0
+
+stdevMice = [WT1mice, HT1mice, KO1mice, WT2mice, HT2mice, KO2mice]
+for i in range(0, len(stdevMice)):
+    stdevMice[i] = statistics.stdev(stdevMice[i])
+    
+stdevWT = [stdevMice[0], stdevMice[3]]
+stdevHT = [stdevMice[1], stdevMice[4]]
+stdevKO = [stdevMice[2], stdevMice[5]]
+        
 width = 0.8
 
 WT = [cornersByGroup[0][2], cornersByGroup[1][2]]
@@ -111,11 +159,11 @@ KO = [cornersByGroup[0][1], cornersByGroup[1][1]]
 indices = np.arange(len(WT))
 
 plt.bar(indices, WT, width = 0.5 * width, \
-        color = 'tab:blue',  alpha = 0.9, label = 'WT')#, yerr = stdevWT)
+        color = 'tab:blue',  alpha = 0.9, label = 'WT', yerr = stdevWT)
 plt.bar([i + 0.25 * width for i in indices], HT, width = 0.5 * width, \
-        color = 'tab:orange', alpha = 0.9, label = 'HT')#, yerr = stdevHT)
+        color = 'tab:orange', alpha = 0.9, label = 'HT', yerr = stdevHT)
 plt.bar([i-0.25 * width for i in indices], KO, width = 0.5 * width, \
-        color = 'tab:green', alpha = 0.9, label = 'KO')#, yerr = stdevKO)
+        color = 'tab:green', alpha = 0.9, label = 'KO', yerr = stdevKO)
 
 plt.xticks(indices, 
            ['Day{}'.format(i) for i in range(1, 3)] )
