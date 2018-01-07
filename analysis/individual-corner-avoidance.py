@@ -68,8 +68,10 @@ for i in range(1, 3):
         analyzeSet = cornersByMouse2
     
     for key,val in analyzeSet.items():
+        val[6] = val[0]
+        
         for j in range(1, 5):
-            if val[j] > val[6]:
+            if val[j] < val[6]:
                 val[5] = j
                 val[6] = val[j]
         val[7] = (val[6] / val[0]) * 100
