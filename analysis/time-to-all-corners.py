@@ -68,6 +68,9 @@ for i in range(1, 3):
                 if key != '27 KO':
                     cornersByGroup[i-1][1] = \
                         cornersByGroup[i-1][1] + val['time']
+                else:
+                    cornersByGroup[i-1][1] = \
+                        cornersByGroup[i-1][1] + 79200
             if key[-2:] == 'WT':
                 cornersByGroup[i-1][2] = cornersByGroup[i-1][2] + val['time']
                 
