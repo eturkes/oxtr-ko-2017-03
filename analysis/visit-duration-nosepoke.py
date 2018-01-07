@@ -123,5 +123,25 @@ for i in range(0, 2):
             durationToPoke[i][1] = (val / analyzeDuration[key]) * 100
         if key == 'WT':
             durationToPoke[i][2] = (val / analyzeDuration[key]) * 100
-        
-    
+            
+width = 0.8
+
+WT = [durationToPoke[0][2], durationToPoke[1][2]]
+HT = [durationToPoke[0][0], durationToPoke[1][0]]
+KO = [durationToPoke[0][1], durationToPoke[1][1]]
+
+indices = np.arange(len(WT))
+
+plt.bar(indices, WT, width = 0.5 * width, \
+        color = 'tab:blue',  alpha = 0.9, label = 'WT')#, yerr = stdevWT)
+plt.bar([i + 0.25 * width for i in indices], HT, width = 0.5 * width, \
+        color = 'tab:orange', alpha = 0.9, label = 'HT')#, yerr = stdevHT)
+plt.bar([i-0.25 * width for i in indices], KO, width = 0.5 * width, \
+        color = 'tab:green', alpha = 0.9, label = 'KO')#, yerr = stdevKO)
+
+plt.xticks(indices, 
+           ['Day{}'.format(i) for i in range(1, 3)] )
+
+plt.legend()
+
+plt.show()

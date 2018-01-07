@@ -67,3 +67,25 @@ for i in range(1, 3):
         print('%s: %d nosepokes' % ('WT2', pokesByGroup['WT']))
         print('%s: %d nosepokes' % ('HT2', pokesByGroup['HT']))
         print('%s: %d nosepokes' % ('KO2', pokesByGroup['KO']))
+        
+width = 0.8
+
+WT = [pokesByGroup1['WT'], pokesByGroup2['WT']]
+HT = [pokesByGroup1['HT'], pokesByGroup2['HT']]
+KO = [pokesByGroup1['KO'], pokesByGroup2['KO']]
+
+indices = np.arange(len(WT))
+
+plt.bar(indices, WT, width = 0.5 * width, \
+        color = 'tab:blue',  alpha = 0.9, label = 'WT')#, yerr = stdevWT)
+plt.bar([i + 0.25 * width for i in indices], HT, width = 0.5 * width, \
+        color = 'tab:orange', alpha = 0.9, label = 'HT')#, yerr = stdevHT)
+plt.bar([i-0.25 * width for i in indices], KO, width = 0.5 * width, \
+        color = 'tab:green', alpha = 0.9, label = 'KO')#, yerr = stdevKO)
+
+plt.xticks(indices, 
+           ['Day{}'.format(i) for i in range(1, 3)] )
+
+plt.legend()
+
+plt.show()

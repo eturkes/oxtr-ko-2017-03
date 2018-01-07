@@ -16,6 +16,8 @@ start = {'start1': start1, 'start2': start2}
 end = {'end1': end1, 'end2': end2}
 dataSets = ['Day 1', 'Day 2']
 
+overtakeByGroup = [[0, 0, 0], [0, 0, 0]]
+
 for i in range(1, 3):
     startStr = 'start' + str(i)
     endStr = 'end' + str(i)
@@ -43,10 +45,60 @@ for i in range(1, 3):
                         = 1
                 else:
                     overtaken[str(visits[j-1].Animal)][str(visits[j].Animal)] \
-                    = overtaken[str(visits[j-1].Animal)][str(visits[j].Animal)]\
+                    =overtaken[str(visits[j-1].Animal)][str(visits[j].Animal)]\
                         + 1 
     
     if i == 1:
-        overtaken1 = overtaken
+        overtake1 = overtaken
+        
+        for key,val in overtake1.items():
+            if key[-2:] == 'HT':
+                overtakeByGroup[i-1][0] = \
+                    overtakeByGroup[i-1][0] + val['occurances']
+            if key[-2:] == 'KO':
+                overtakeByGroup[i-1][1] = \
+                    overtakeByGroup[i-1][1] + val['occurances']
+            if key[-2:] == 'WT':
+                overtakeByGroup[i-1][2] = \
+                    overtakeByGroup[i-1][2] + val['occurances']
+        
     else:
-        overtaken2 = overtaken
+        overtake2 = overtaken
+        
+        for key,val in overtake2.items():
+            if key[-2:] == 'HT':
+                overtakeByGroup[i-1][0] = \
+                    overtakeByGroup[i-1][0] + val['occurances']
+            if key[-2:] == 'KO':
+                if key != '27 KO':
+                    overtakeByGroup[i-1][1] = \
+                        overtakeByGroup[i-1][1] + val['occurances']
+            if key[-2:] == 'WT':
+                overtakeByGroup[i-1][2] = \
+                    overtakeByGroup[i-1][2] + val['occurances']
+                
+for i in range(0, len(overtakeByGroup)):
+    for j in range(0, len(overtakeByGroup[i])):
+        overtakeByGroup[i][j] = overtakeByGroup[i][j] / 10
+        
+width = 0.8
+
+WT = [overtakeByGroup[0][2], overtakeByGroup[1][2]]
+HT = [overtakeByGroup[0][0], overtakeByGroup[1][0]]
+KO = [overtakeByGroup[0][1], overtakeByGroup[1][1]]
+
+indices = np.arange(len(WT))
+
+plt.bar(indices, WT, width = 0.5 * width, \
+        color = 'tab:blue',  alpha = 0.9, label = 'WT')#, yerr = stdevWT)
+plt.bar([i + 0.25 * width for i in indices], HT, width = 0.5 * width, \
+        color = 'tab:orange', alpha = 0.9, label = 'HT')#, yerr = stdevHT)
+plt.bar([i-0.25 * width for i in indices], KO, width = 0.5 * width, \
+        color = 'tab:green', alpha = 0.9, label = 'KO')#, yerr = stdevKO)
+
+plt.xticks(indices, 
+           ['Day{}'.format(i) for i in range(1, 3)] )
+
+plt.legend()
+
+plt.show()
