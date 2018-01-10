@@ -1,4 +1,4 @@
-name: anaconda
+name: oxtr-ko_2017.03
 channels:
   - defaults
 dependencies:
