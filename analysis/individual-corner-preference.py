@@ -140,14 +140,30 @@ for i in range(0, 2):
     h = 0
     k = 0
 
+from scipy import stats
+
 stdevMice = [WT1mice, HT1mice, KO1mice, WT2mice, HT2mice, KO2mice]
+semMice = [WT1mice, HT1mice, KO1mice, WT2mice, HT2mice, KO2mice]
+normality = [WT1mice, HT1mice, KO1mice, WT2mice, HT2mice, KO2mice]
+
 for i in range(0, len(stdevMice)):
     stdevMice[i] = statistics.stdev(stdevMice[i])
+    semMice[i] = stats.sem(semMice[i])
+    normality[i] = stats.shapiro(normality[i])
+
+variance = stats.levene(WT1mice, HT1mice, KO1mice, WT2mice, HT2mice, KO2mice)
+
+dunns = common.kw_dunn([WT1mice, HT1mice, KO1mice, WT2mice, HT2mice, KO2mice], \
+                       [(0,3), (1, 4), (2, 5)])
     
-stdevWT = [stdevMice[0], stdevMice[3]]
-stdevHT = [stdevMice[1], stdevMice[4]]
-stdevKO = [stdevMice[2], stdevMice[5]]
-        
+semWT = [semMice[0], semMice[3]]
+semHT = [semMice[1], semMice[4]]
+semKO = [semMice[2], semMice[5]]    
+    
+semWT = [semMice[0], semMice[3]]
+semHT = [semMice[1], semMice[4]]
+semKO = [semMice[2], semMice[5]]
+
 width = 0.8
 
 WT = [cornersByGroup[0][2], cornersByGroup[1][2]]
@@ -156,16 +172,40 @@ KO = [cornersByGroup[0][1], cornersByGroup[1][1]]
 
 indices = np.arange(len(WT))
 
-plt.bar(indices, WT, width = 0.5 * width, \
-        color = 'tab:blue',  alpha = 0.9, label = 'WT', yerr = stdevWT)
-plt.bar([i + 0.25 * width for i in indices], HT, width = 0.5 * width, \
-        color = 'tab:orange', alpha = 0.9, label = 'HT', yerr = stdevHT)
-plt.bar([i-0.25 * width for i in indices], KO, width = 0.5 * width, \
-        color = 'tab:green', alpha = 0.9, label = 'KO', yerr = stdevKO)
+plt.bar(indices, WT, width = 0.25 * width, \
+        color = 'tab:blue',  alpha = 0.9, label = 'WT', yerr = semWT, \
+        capsize = 5)
+plt.bar([i + 0.25 * width for i in indices], HT, width = 0.25 * width, \
+        color = 'tab:orange', alpha = 0.9, label = 'HT', yerr = semHT, \
+        capsize = 5)
+plt.bar([i - 0.25 * width for i in indices], KO, width = 0.25 * width, \
+        color = 'tab:green', alpha = 0.9, label = 'KO', yerr = semKO, \
+        capsize = 5)
 
 plt.xticks(indices, 
            ['Day{}'.format(i) for i in range(1, 3)] )
 
+#plt.plot([0, 0, 1, 1], \
+#         [WT[0]+100, WT[1]+300, WT[1]+300, WT[1]+100], lw = 1.5, c = 'k')
+#plt.text(0.5, WT[1]+275, \
+#    "**", ha = 'center', va = 'bottom', color = 'k')
+#
+#plt.plot([0.25 * width, 0.25 * width, 1 + 0.25 * width, 1 + 0.25 * width], \
+#         [HT[0]+100, HT[1]+300, HT[1]+300, HT[1]+100], lw = 1.5, c = 'k')
+#plt.text(((0.25 * width) + (1 + 0.25 * width)) * 0.5, HT[1]+275, \
+#    "***", ha = 'center', va = 'bottom', color = 'k')
+#
+#plt.plot([0 - 0.25 * width, 0 - 0.25 * width, 1 - 0.25 * width, 1 - 0.25 * width], \
+#         [KO[0]+100, KO[1]+300, KO[1]+300, KO[1]+100], lw = 1.5, c = 'k')
+#plt.text(((0 - 0.25 * width) + (1 - 0.25 * width)) * 0.5, KO[1]+275, \
+#    "**", ha = 'center', va = 'bottom', color = 'k')
+
 plt.legend()
 
-plt.show()        
+plt.show()
+
+print('normality')
+print(normality)
+print(variance)
+print('Dunns multiple comparison test, following a Kruskal-Wallis 1-way ANOVA')
+print(dunns)       
