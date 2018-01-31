@@ -153,8 +153,20 @@ def kw_dunn(groups, to_compare=None, alpha=0.05, method='bonf'):
     for pp, (ii, jj) in enumerate(to_compare):
 
         # standardized score
-        Zij = (np.abs(Rmean[ii] - Rmean[jj]) /
-               np.sqrt((1. / 12.) * N * (N + 1) * (1. / n[ii] + 1. / n[jj])))
+        # Added correction suggested by @jazon33y. The funtion now produces the same output as that of R library(dunn.test)
+        ts3_ts = list(np.unique(allgroups, return_counts=True)[1])
+        E_ts3_ts = sum([x**3 - x for x in ts3_ts if x>1])
+
+        if sum([x>1 for x in ts3_ts]) > 0:
+            yi = np.abs(Rmean[ii] - Rmean[jj])
+            theta10 = (N * (N + 1)) / 12
+            theta11 =  E_ts3_ts / ( 12* (N - 1) )
+            theta2 = (1 / n[ii] + 1 / n[jj])
+            theta = np.sqrt( (theta10 - theta11) * theta2 )
+            Zij = yi / theta
+        else:
+            Zij = (np.abs(Rmean[ii] - Rmean[jj]) /
+                   np.sqrt((1. / 12.) * N * (N + 1) * (1. / n[ii] + 1. / n[jj]))) 
         Z_pairs[pp] = Zij
 
     # corresponding p-values obtained from upper quantiles of the standard
