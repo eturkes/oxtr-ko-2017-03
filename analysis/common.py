@@ -27,8 +27,7 @@ def load_data(*args, **kwargs):
     print("%s:\t%s - %s" % (kwargs['phase1'], start1, end1))
     print("%s:\t%s - %s" % (kwargs['phase2'], start2, end2))
 
-    # Check for any problems (indicated in the log) during the period of
-    # interest.
+    # Check for any problems (indicated in the log) during the period of interest.
     dataValidator = pm.DataValidator(pm.PresenceLogAnalyzer())
     validatorReport = dataValidator(data)
 
