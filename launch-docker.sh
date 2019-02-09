@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #    This file is part of oxtr-ko-201703.
-#    Copyright (C) 2018  Emir Turkes
+#    Copyright (C) 2018-2019  Emir Turkes
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
