@@ -21,7 +21,7 @@
 
 def load_data(*args, **kwargs):
     """This function loads the data and checks its validity."""
-    
+
     import pymice as pm
 
     # Files relevent to Habituation 1 (hab1) period.
@@ -55,5 +55,5 @@ def load_data(*args, **kwargs):
     if noPresenceProblems(validatorReport, (start1, end1)):
         if noPresenceProblems(validatorReport, (start2, end2)):
             print("Presences OK.")
-        
+
     return data, start1, end1, start2, end2
