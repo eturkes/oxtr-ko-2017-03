@@ -19,5 +19,8 @@
 -->
 
 # oxtr-ko-201703
+#### *This analysis contains usable results but is being further analyzed*
 
-Intellicage analysis for the oxytocin receptor knockout mouse
+Intellicage analysis for the oxytocin receptor knockout mouse.
+Individual Jupyter Notebooks for each paradigm are located in the `analysis` dir.
+They can be easily explored in Docker by running `./launch-docker.sh`.
