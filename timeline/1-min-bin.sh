@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#    This file is part of oxtr-ko-201703.
+#    This file is part of oxtr-ko-2017-03.
 #    Copyright (C) 2018-2019  Emir Turkes
 #
 #    This program is free software: you can redistribute it and/or modify
