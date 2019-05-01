@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Emir Turkes can be contacted at eturkes@bu.edu
+#    Emir Turkes can be contacted at emir.turkes@eturkes.com
 
 docker run -it --rm -p 8888:8888 \
 	-v ${PWD}:/home/jovyan/work eturkes/pymice-notebook:py3.5.4v2 \
