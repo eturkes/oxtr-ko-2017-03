@@ -1,5 +1,5 @@
 <!---
-    This file is part of oxtr-ko-2017-03.
+    This file is part of oxtr-ko-201703.
     Copyright (C) 2018-2019  Emir Turkes
 
     This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@
     Emir Turkes can be contacted at emir.turkes@eturkes.com
 -->
 
-# oxtr-ko-2017-03
+# oxtr-ko-201703
 #### *This analysis is a work-in-progress*
 
 Intellicage analysis for the oxytocin receptor knockout mouse.  
