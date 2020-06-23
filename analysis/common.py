@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*
 
 #    This file is part of oxtr-ko-201703.
-#    Copyright 2018-2020 (C)  Emir Turkes, Phenovance LLC
+#    Copyright (C) 2018-2020  Emir Turkes, Phenovance LLC
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
